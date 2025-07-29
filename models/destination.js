@@ -15,7 +15,6 @@ city: {
 },
 image: {
     type: String,
-    required: false,
 },
 favoritedBy: {
     type: mongoose.Schema.Types.ObjectId,
