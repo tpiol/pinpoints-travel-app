@@ -45,6 +45,7 @@ app.get("/", async (req, res) => {
 
 app.use("/auth", authController);
 
+
 app.get("/vip-lounge", isSignedIn, (req, res) => {
   res.send(`Welcome to the party ${req.session.user.username}`);
 });

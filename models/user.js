@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  visitedDestinations: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Destination"
+  }
 });
 
 const User = mongoose.model("User", userSchema);
