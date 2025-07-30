@@ -1,13 +1,26 @@
-<%- include('../partials/_html-head.ejs', {title: 'All Destinations'}) %>
-<%- include('../partials/_nav-bar.ejs') %>
+<%- include('../partials/_html-head.ejs', {title: 'All Destinations' }) %>
+    <%- include('../partials/_nav-bar.ejs') %>
 
-  </head>
-  <body>
-    <h1>Here's all the Destinations!</h1>
-  </body>
-  <a href="/destinations/:destinationId/">
-        <% allDestinations.forEach(destination => { %>
-         <p><%= destination.name %></p>
-        <% }) %>
-</a>
-</html>
+        <main>
+            <h1>Here's all the Destinations!</h1>
+
+                <% allDestinations.forEach(destination=> { %>
+                    <article>
+                    <a href="/destinations/<%= destination._id %>">
+                    <h3> <%= destination.country %> </h3>
+                    </a>
+                    <a href="/destinations/:destinationId/notes">
+                    View Destination Notes
+                    </a>
+               
+                </article>
+
+                    <% }) %>
+            </a>
+        <a href="/destinations/new">Add a new destination </a> 
+         
+        
+        </main>
+        </body>
+
+        </html>

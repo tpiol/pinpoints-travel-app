@@ -1,0 +1,31 @@
+<%- include('../partials/_html-head.ejs', {title: 'destination.name' }) %>
+  <%- include('../partials/_nav-bar.ejs') %>
+
+    </head>
+
+    <body>
+      <h1>Add a new Destination</h1>
+    </body>
+    <article>
+      <form action="/destinations" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="country">Select Country</label>
+        <select id="status" name="status">
+          <option value="indonesia">Indonesia</option>
+          <option value="norway">Norway</option>
+          <option value="portugal">Portugal</option>
+          <option value="singapore">Singapore</option>
+          <option value="thailand">Thailand</option>
+        </select>
+
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image">
+
+        <button type="submit">Submit</button>
+      </form>
+    </article>
+    </a>
+
+    </html>
