@@ -7,8 +7,9 @@
             <h1>
                 <%= destination.country %>
             </h1>
+           <img src="<%= destination.image %>">
             <article>
-                
+                <a href="/destinations/<%= destination._id %>/notes/new">Add a new note</a>
             </article>
         </body>
 
