@@ -5,4 +5,9 @@
   <body>
     <h1>Here's all the Destinations!</h1>
   </body>
+  <a href="/destinations/:destinationId/">
+        <% allDestinations.forEach(destination => { %>
+         <p><%= destination.name %></p>
+        <% }) %>
+</a>
 </html>
