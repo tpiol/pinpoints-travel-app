@@ -112,6 +112,19 @@ router.put("/:destinationId/notes/:noteId", async (req, res) => {
        console.log(error);
        res.redirect("/")
      }
-})
+});
+
+// DELETE /destinations/:destinationId/notes/:notesId
+router.delete("/:destinationId/notes/:noteId", async (req, res) => {
+    try {
+    const currentDestination = await Destination.findById(req.params.destinationId);
+        currentDestination.notes.id(req.params.noteId).deleteOne();
+        await currentDestination.save();
+        res.redirect(`/destinations/${currentDestination._id}/notes`)
+    } catch (error) {
+        console.log(error);
+        res.redirect("/")
+    }
+});
 
 module.exports = router;

@@ -3,40 +3,36 @@
 
 
 
-        <body>
-            <main>
-                <header>
-                    <h1>
-                        <%= destination.country %>
-                    </h1>
-                    <img src="<%= destination.image %>">
-                </header>
-                <section>
-                    <ul>
-                        <a href="/destinations/<%= destination._id %>/notes/new">Add a new note</a>
-                        <% destination.notes.forEach(note=> { %>
-                            <li>
-                                <figure>
-                                    <% if (note.image) { %>
-                                    <img src="<%= note.image %>" alt="Photo of <%= note.city %>"
-                                    style="max-width: 300px;">
-                                    <% } %>
-                                    <figcaption>
-                                    <strong> <%= user.username %></strong> shared a note from <strong>
-                                    <%= note.city %></strong>
-                                    </figcaption>
-                                </figure>
-                                <p>
-                                    <%= note.destinationNotes %>
-                                </p>
-                                <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/edit">
-                                    <button type="submit">Edit Note</button>
-                                </form>
-                                <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/delete">
-                                    <button type="submit">Delete Note</button>
-                                </form>
-                            </li>
-                            <% }) %>
+    <body>
+    <main>
+        <header>
+            <h1><%= destination.country %></h1>
+            <img src="<%= destination.image %>">
+        </header>
+            <section>
+                <ul>
+                    <a href="/destinations/<%= destination._id %>/notes/new">Add a new note</a>
+                    <% destination.notes.forEach(note=> { %>
+                    <li>
+                     <figure>
+                    <% if (note.image) { %>
+                    <img src="<%= note.image %>" alt="Photo of <%= note.city %>"
+                     style="max-width: 300px;">
+                    <% } %>
+                    <figcaption>
+                    <strong> <%= user.username %></strong> shared a note from <strong>
+                    <%= note.city %></strong>
+                     </figcaption>
+                     </figure>
+                    <p><%= note.destinationNotes %></p>
+                     <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/edit">
+                    <button type="submit">Edit Note</button>
+                    </form>
+                    <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete Note</button>
+                    </form>
+                    </li>
+                    <% }) %>
                     </ul>
                 </section>
 
