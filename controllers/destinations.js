@@ -74,7 +74,7 @@ router.post("/", async (req, res) => {
     try {
         req.body.owner = req.session.user._id;
         await Destination.create(req.body);
-        res.redirect("/destinations")
+        res.redirect("destinations")
     } catch (error) {
         console.log(error);
         res.redirect("/")
@@ -95,9 +95,19 @@ router.post("/:destinationId/notes", async (req, res) => {
 })
 
 // PUT //destinationId/notes
-router.put("/:destinationId/notes", async (req, res) => {
+router.put("/:destinationId/notes/:noteId", async (req, res) => {
      try {
     const currentDestination = await Destination.findById(req.params.destinationId);
+    const note = currentDestination.notes.id(req.params.noteId);
+    if (note && note.name.equals(req.session.user._id)) {
+        note.city = req.body.city;
+        note.image = req.body.image;
+        note.destinationNotes = req.body.destinationNotes;        
+        await currentDestination.save();
+        res.redirect(`/destinations/${currentDestination._id}/notes`)
+    } else {
+        res.send("You don't have permission to edit this note.")
+    }
      } catch (error) {
        console.log(error);
        res.redirect("/")
