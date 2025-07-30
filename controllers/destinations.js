@@ -36,9 +36,9 @@ router.get("/:destinationId/notes", async (req, res) => {
 // GET /destinations/new
 router.get("/new", (req, res) => {
     try {
-    
+
         res.render("destinations/new.ejs")
-    
+
     } catch (error) {
         console.log(error);
         res.redirect("/");
@@ -47,21 +47,61 @@ router.get("/new", (req, res) => {
 
 // GET /:destinationId/notes/new
 router.get("/:destinationId/notes/new", async (req, res) => {
-    res.render("destinations/notes/new.ejs")
+    const currentDestinationdestination = await Destination.findById(req.params.destinationId)
+    res.render("destinations/notes/new.ejs", {
+        destination: currentDestination,
+    })
 });
 
-// POST /destinations/
-router.post("/", async (req, res) => {
-try {
-req.body.owner = req.session.user._id;
-await Destination.create(req.body);
-res.redirect("/destinations")
-} catch (error) {
-    console.log(error);
-    res.redirect("/")
-}
+// GET /:destinationId/notes/edit
+router.get("/:destinationId/notes/:noteId/edit", async (req, res) => {
+    try {
+        const currentDestination = await Destination.findById(req.params.destinationId)
+        const note = currentDestination.notes.id(req.params.noteId);
+        res.render("destinations/notes/edit.ejs", {
+            note: note,
+          destination: currentDestination,
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect("/");
+    }
 })
 
 
+// POST /destinations/
+router.post("/", async (req, res) => {
+    try {
+        req.body.owner = req.session.user._id;
+        await Destination.create(req.body);
+        res.redirect("/destinations")
+    } catch (error) {
+        console.log(error);
+        res.redirect("/")
+    }
+})
+
+// POST //:destinationId/notes/
+router.post("/:destinationId/notes", async (req, res) => {
+    try {
+        const currentDestination = await Destination.findById(req.params.destinationId);
+        currentDestination.notes.push(req.body);
+        await currentDestination.save();
+        res.redirect(`/destinations/${currentDestination._id}/notes`);
+    } catch (error) {
+        console.log(error);
+        res.redirect("/")
+    }
+})
+
+// PUT //destinationId/notes
+router.put("/:destinationId/notes", async (req, res) => {
+     try {
+    const currentDestination = await Destination.findById(req.params.destinationId);
+     } catch (error) {
+       console.log(error);
+       res.redirect("/")
+     }
+})
 
 module.exports = router;

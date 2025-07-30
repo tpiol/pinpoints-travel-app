@@ -1,28 +1,31 @@
 <%- include('../../partials/_html-head.ejs', {title: 'destination.name' }) %>
-<%- include('../../partials/_nav-bar.ejs') %>
+  <%- include('../../partials/_nav-bar.ejs') %>
 
     </head>
 
     <body>
-      <h1>Add a new Destination</h1>
+      <h1>Add a new community note for <%= destination.country %></h1>
     </body>
     <article>
-      <form action="/destinations" method="POST">
-    
+      <form action="/destinations/<%= destination._id %>/notes" method="POST">
+        <label for="name">Name:</label>
+        <input type="hidden" name="name" id="name" value="<%= user._id %>">
 
-        <label for="country">Select Country</label>
-        <select id="country" name="country">
-          <option value="Indonesia">Indonesia</option>
-          <option value="Norway">Norway</option>
-          <option value="Portugal">Portugal</option>
-          <option value="Singapore">Singapore</option>
-          <option value="Thailand">Thailand</option>
-        </select>
+        <p><strong>
+            <%= user.username %>
+          </strong></p>
 
-        <label for="image">Image</label>
+        <label for="image">Upload Image URL</label>
         <input type="text" name="image" id="image">
 
+        <label for="city">City</label>
+        <input type="text" name="city" id="city">
+
+        <label for="destinationNotes">Add Your Note:</label>
+        <textarea name="destinationNotes" id="destinationNotes" rows="4" required></textarea>
+
         <button type="submit">Submit</button>
+
       </form>
     </article>
     </a>

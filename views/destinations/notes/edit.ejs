@@ -1,0 +1,35 @@
+<%- include('../../partials/_html-head.ejs', {title: 'destination.name' }) %>
+  <%- include('../../partials/_nav-bar.ejs') %>
+
+    </head>
+
+    <body>
+      <h1>Edit your note in: <%= destination.country %></h1>
+   
+    <article>
+      <form action="/destinations/<%= destination._id %>/notes/<%= note.id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="hidden" name="name" id="name" value="<%= user._id %>">
+
+        <p><strong><%= user.username %></strong></p>
+        <% if (note.image) { %>
+         <p>Current Image:</p>
+         <img src="<%= note.image %>" alt="Current Note Image" style="max-width: 300px; border-radius:8px">
+          <% } %>
+
+        <label for="image">Edit Image URL</label>
+        <input type="text" name="image" id="image" value="<%= note.image %>">
+
+        <label for="city">Edit City</label>
+        <input type="text" name="city" id="city" value="<%= note.city %>">
+
+        <label for="destinationNotes">Edit Your Note:</label>
+        <textarea name="destinationNotes" id="destinationNotes" rows="4" required ><%= note.destinationNotes %></textarea>
+
+        <button type="submit">Submit</button>
+
+      </form>
+    </article>
+
+ </body>
+    </html>
