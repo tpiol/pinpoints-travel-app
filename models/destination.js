@@ -19,10 +19,10 @@ const notesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    favoritedBy: {
+    favoritedBy: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    },
+    }],
 });
 
 const destinationSchema = new mongoose.Schema({

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Destination = require("../models/destination");
+const { default: mongoose } = require("mongoose");
 
 //                          ROUTES
 
@@ -22,17 +23,14 @@ router.get("/", async (req, res) => {
 router.get("/:destinationId/notes", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId)
+        const userId = req.session.user._id;
+        currentDestination.notes.forEach(note => {
+            note.userHasFavorited = note.favoritedBy.some(favoriteUserId => favoriteUserId.equals(userId));
+        });
 
-        console.log(currentDestination);
-        // const userHasFavorited = currentDestination.favoritedBy.some((user) =>
-        // user.equals(req.params.note._id)
-        // )
-        // const notes = currentDestination.notes.populate({path: "name"})
-        console.log(currentDestination);
-        console.log(req.session.user)
         res.render("destinations/show.ejs", {
             destination: currentDestination,
-            
+
         });
     } catch (error) {
         console.log(error);
@@ -68,7 +66,7 @@ router.get("/:destinationId/notes/:noteId/edit", async (req, res) => {
         const note = currentDestination.notes.id(req.params.noteId);
         res.render("destinations/notes/edit.ejs", {
             note: note,
-          destination: currentDestination,
+            destination: currentDestination,
         });
     } catch (error) {
         console.log(error);
@@ -102,43 +100,45 @@ router.post("/:destinationId/notes", async (req, res) => {
     }
 });
 
-// POST /destinations/:destinationId/notes/:notesId/favorited-by
-// router.post("/:destinationId/notes/notesId/favorited-by", async (req, res) => {
-//     try {
-//         await Destination.findByIdAndUpdate(req.params.noteId, {
-//             $push: { favoritedBy: req.params.userId },
-//         });
-//         res.redirect(`/destinations/${currentDestination._id}/notes`);
-//     } catch (error) {
-//         console.log(error);
-//         res.redirect("/");
-//     }
-// })
+// POST /destinations/:destinationId/notes/:notesId/favorited-by/:userId
+router.post("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, res) => {
+    try {
+        const currentDestination = await Destination.findById(req.params.destinationId);
+        const currentNote = currentDestination.notes.id(req.params.noteId);
+        currentNote.favoritedBy.push(req.params.userId);
+        await currentDestination.save();
+        res.redirect(`/destinations/${currentDestination._id}/notes`);
+
+    } catch (error) {
+        console.log(error);
+        res.redirect("/");
+    }
+})
 
 // PUT //destinationId/notes
 router.put("/:destinationId/notes/:noteId", async (req, res) => {
-     try {
-    const currentDestination = await Destination.findById(req.params.destinationId);
-    const note = currentDestination.notes.id(req.params.noteId);
-    if (note && note.authorId == req.session.user._id) {
-        note.city = req.body.city;
-        note.image = req.body.image;
-        note.destinationNotes = req.body.destinationNotes;        
-        await currentDestination.save();
-        res.redirect(`/destinations/${currentDestination._id}/notes`)
-    } else {
-        res.send("You don't have permission to edit this note.")
+    try {
+        const currentDestination = await Destination.findById(req.params.destinationId);
+        const note = currentDestination.notes.id(req.params.noteId);
+        if (note && note.authorId == req.session.user._id) {
+            note.city = req.body.city;
+            note.image = req.body.image;
+            note.destinationNotes = req.body.destinationNotes;
+            await currentDestination.save();
+            res.redirect(`/destinations/${currentDestination._id}/notes`)
+        } else {
+            res.send("You don't have permission to edit this note.")
+        }
+    } catch (error) {
+        console.log(error);
+        res.redirect("/")
     }
-     } catch (error) {
-       console.log(error);
-       res.redirect("/")
-     }
 });
 
 // DELETE /destinations/:destinationId/notes/:notesId
 router.delete("/:destinationId/notes/:noteId", async (req, res) => {
     try {
-    const currentDestination = await Destination.findById(req.params.destinationId);
+        const currentDestination = await Destination.findById(req.params.destinationId);
         currentDestination.notes.id(req.params.noteId).deleteOne();
         await currentDestination.save();
         res.redirect(`/destinations/${currentDestination._id}/notes`)
@@ -147,5 +147,21 @@ router.delete("/:destinationId/notes/:noteId", async (req, res) => {
         res.redirect("/")
     }
 });
+
+// DELTE /destinations/:destinationId/notes/:notesId/favorited-by/:userId
+router.delete("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, res) => {
+    try {
+        const currentDestination = await Destination.findById(req.params.destinationId);
+        const currentNote = currentDestination.notes.id(req.params.noteId);
+        console.log(currentNote)
+        const index = currentNote.favoritedBy.indexOf(req.session.user._id)
+        currentNote.favoritedBy.splice(index, 1);
+        await currentDestination.save();
+        res.redirect(`/destinations/${currentDestination._id}/notes`)
+    } catch (error) {
+        console.log(error);
+        res.redirect("/");
+    }
+})
 
 module.exports = router;
