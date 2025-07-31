@@ -21,14 +21,18 @@ router.get("/", async (req, res) => {
 // GET /destinations/:destinationId
 router.get("/:destinationId/notes", async (req, res) => {
     try {
-        const currentDestination = await Destination.findById(req.params.destinationId).populate({
-            path: "notes.name",
-            model: "User",
-        }).exec();
+        const currentDestination = await Destination.findById(req.params.destinationId)
+
+        console.log(currentDestination);
+        // const userHasFavorited = currentDestination.favoritedBy.some((user) =>
+        // user.equals(req.params.note._id)
+        // )
         // const notes = currentDestination.notes.populate({path: "name"})
         console.log(currentDestination);
+        console.log(req.session.user)
         res.render("destinations/show.ejs", {
             destination: currentDestination,
+            
         });
     } catch (error) {
         console.log(error);
@@ -98,12 +102,25 @@ router.post("/:destinationId/notes", async (req, res) => {
     }
 });
 
+// POST /destinations/:destinationId/notes/:notesId/favorited-by
+// router.post("/:destinationId/notes/notesId/favorited-by", async (req, res) => {
+//     try {
+//         await Destination.findByIdAndUpdate(req.params.noteId, {
+//             $push: { favoritedBy: req.params.userId },
+//         });
+//         res.redirect(`/destinations/${currentDestination._id}/notes`);
+//     } catch (error) {
+//         console.log(error);
+//         res.redirect("/");
+//     }
+// })
+
 // PUT //destinationId/notes
 router.put("/:destinationId/notes/:noteId", async (req, res) => {
      try {
     const currentDestination = await Destination.findById(req.params.destinationId);
     const note = currentDestination.notes.id(req.params.noteId);
-    if (note && note.name.equals(req.session.user._id)) {
+    if (note && note.authorId == req.session.user._id) {
         note.city = req.body.city;
         note.image = req.body.image;
         note.destinationNotes = req.body.destinationNotes;        

@@ -9,8 +9,8 @@
     <article>
       <form action="/destinations/<%= destination._id %>/notes" method="POST">
         <label for="name">Name:</label>
-        <input type="hidden" name="name" id="name" value="<%= user._id %>">
-
+        <input type="hidden" name="name" id="name" value="<%= user.username %>">
+        <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
         <p><strong>
             <%= user.username %>
           </strong></p>
