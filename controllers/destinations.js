@@ -21,7 +21,11 @@ router.get("/", async (req, res) => {
 // GET /destinations/:destinationId
 router.get("/:destinationId/notes", async (req, res) => {
     try {
-        const currentDestination = await Destination.findById(req.params.destinationId).populate("country");
+        const currentDestination = await Destination.findById(req.params.destinationId).populate({
+            path: "notes.name",
+            model: "User",
+        }).exec();
+        // const notes = currentDestination.notes.populate({path: "name"})
         console.log(currentDestination);
         res.render("destinations/show.ejs", {
             destination: currentDestination,
@@ -47,7 +51,7 @@ router.get("/new", (req, res) => {
 
 // GET /:destinationId/notes/new
 router.get("/:destinationId/notes/new", async (req, res) => {
-    const currentDestinationdestination = await Destination.findById(req.params.destinationId)
+    const currentDestination = await Destination.findById(req.params.destinationId)
     res.render("destinations/notes/new.ejs", {
         destination: currentDestination,
     })
@@ -66,7 +70,7 @@ router.get("/:destinationId/notes/:noteId/edit", async (req, res) => {
         console.log(error);
         res.redirect("/");
     }
-})
+});
 
 
 // POST /destinations/
@@ -79,7 +83,7 @@ router.post("/", async (req, res) => {
         console.log(error);
         res.redirect("/")
     }
-})
+});
 
 // POST //:destinationId/notes/
 router.post("/:destinationId/notes", async (req, res) => {
@@ -92,7 +96,7 @@ router.post("/:destinationId/notes", async (req, res) => {
         console.log(error);
         res.redirect("/")
     }
-})
+});
 
 // PUT //destinationId/notes
 router.put("/:destinationId/notes/:noteId", async (req, res) => {

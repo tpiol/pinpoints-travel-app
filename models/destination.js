@@ -19,7 +19,7 @@ image: {
 favoritedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-}
+},
 });
 
 const destinationSchema = new mongoose.Schema({
