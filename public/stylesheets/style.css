@@ -1,16 +1,271 @@
 @import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
 
 .barriecito-regular {
-  font-family: "Barriecito", system-ui;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Barriecito", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
     font-family: "barriecito", sans-serif;
+    color: #3B2A22;
+    background-color: #FAF1E7;
+    margin: 0;
+    min-height: 100vh;
+}
+
+main {
+    color: #3B2A22;
+    background-color: #FAF1E7;
+    font-family: "Barriecito", system-ui, sans-serif;
+    min-height: 100vh;
+}
+
+main a {
+    color: #F48B76;
+    text-decoration: none;
+}
+
+main a:hover {
+    text-decoration: underline;
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "barriecito", sans-serif;
+    color: #3B2A22;
+
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul,
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li a {
+    text-decoration: none;
+    color: #F48B76;
+    padding: 0.5rem;
+}
+
+.navbar li a,
+.dropdown-summary {
+    color: #F48B76;
+    font-family: "Barriecito", system-ui;
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+}
+
+.navbar details.dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #F48B76;
+
+}
+
+.dropdown ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    flex-direction: column;
+
+
+}
+
+.dropdown[open] ul {
+    display: flex;
+}
+
+.dropdown ul li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #F48B76;
+    text-decoration: none;
+    white-space: nowrap;
+
+}
+
+.dropdown ul li a:hover {
+    background-color: #F48B76;
+    color: white;
+}
+
+.dropdown-summary {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    color: #F48B76 !important;
+    font-weight: 400;
+    font-family: "Barriecito", system-ui;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    padding: 0.5rem;
+    user-select: none;
+    list-style: none;
+
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.summary-text {
+    color: #F48B76 !important;
+    font-family: "Barriecito", system-ui;
+    font-weight: 400;
+    font-size: 1rem;
+    user-select: none;
+}
+
+/* sign-up page */
+
+.sign-up {
+    background-color: #FAF1E7;
+    color: #3B2A22;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(244, 139, 118, 0.3);
+    font-family: "Barriecito", system-ui, sans-serif;
+
+}
+
+.create-account {
+    color: #F48B76;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+form input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #FCD3A6;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Barriecito", system-ui, sans-serif;
+    background-color: white;
+    color: #3B2A22;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus {
+    border-color: #4AC3B4;
+    outline: none;
+    box-shadow: 0 0 5px #4AC3B4;
+}
+
+button {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #F48B76 !important;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Barriecito", system-ui, sans-serif;
+}
+
+button:hover {
+    background-color: #d46b5f;
+}
+
+.sign-up label {
+    color: #333;
+    font-weight: bold;
+}
+
+/* sign-in page */
+article.sign-in {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: #FAF1E7;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sign-in h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #F48B76;
+}
+
+.label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+input.username,
+input.password {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff !important;
+    color: #333 !important;
+    margin-top: 0.5rem;
+}
+
+.control {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.button.submit {
+    background-color: #F48B76 !important;
+    color: white !important;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
 }

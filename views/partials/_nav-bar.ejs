@@ -1,22 +1,36 @@
 <header>
-  <nav>
-    <ul>
+  <nav class="navbar">
+    <ul class="nav-items">
       <li> <strong>PinPoints</strong> </li>
     </ul>
     <ul>
       <li><a href="/">Home</a></li>
       <% if (user) { %>
-      <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-      <li><a href="#" data-theme-switcher="light">Light</a></li>
-     <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-      <li> <a href="/destinations">View Destinations</a> </li>
-      <li> <a href="/users/profile">My Profile</a> </li>
-      <li><a href="/auth/sign-out">Sign Out</a></li>
-     
-      <% } else { %>
-      <li><a href="/auth/sign-in">Sign In</a></li>
-      <li><a href="/auth/sign-up">Sign Up</a></li>
-      <% } %>
+        <details class="dropdown">
+          <summary class="dropdown-summary"><span class="summary-text">View Destinations</span></summary>
+          <ul>
+            <li> <a href="/destinations/688a70d5aee7d35911048205/notes">Norway</a> </li>
+            <li> <a href="/destinations/688a7109aee7d35911048208/notes">Indonesia</a> </li>
+            <li> <a href="/destinations/688a7128aee7d3591104820b/notes">Portugal</a> </li>
+            <li> <a href="/destinations/688a716aaee7d35911048211/notes">Thailand</a> </li>
+            <li> <a href="/destinations/688a77eaf2a2b7c0bbc95a1c/notes">Singapore</a> </li>
+          </ul>
+        </details>
+        <li> <a href="/users/profile">My Profile</a> </li>
+        <details class="dropdown">
+          <summary class="dropdown-summary"><span class="summary-text">Theme</span></summary>
+          <ul>
+            <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+            <li><a href="#" data-theme-switcher="light">Light</a></li>
+            <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+          </ul>
+        </details>
+        <li><a href="/auth/sign-out">Sign Out</a></li>
+
+        <% } else { %>
+          <li><a href="/auth/sign-in">Sign In</a></li>
+          <li><a href="/auth/sign-up">Sign Up</a></li>
+          <% } %>
     </ul>
   </nav>
 </header>
