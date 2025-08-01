@@ -105,7 +105,18 @@ router.post("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, re
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
         const currentNote = currentDestination.notes.id(req.params.noteId);
-        currentNote.favoritedBy.push(req.params.userId);
+        let alreadyFavorited = false;
+
+        for (let i = 0; i < currentNote.favoritedBy.length; i++) {
+            if (currentNote.favoritedBy[i].toString() === req.params.userId) {
+                alreadyFavorited = true;
+                break;
+            }
+        }
+        if (!alreadyFavorited) {
+            currentNote.favoritedBy.push(req.params.userId);
+        };
+
         await currentDestination.save();
         res.redirect(`/destinations/${currentDestination._id}/notes`);
 
