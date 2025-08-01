@@ -1,57 +1,71 @@
-<%- include('../partials/_html-head.ejs', {title: 'destination.name' }) %>
+<%- include('../partials/_html-head.ejs', {title: "destination.country" }) %>
     <%- include('../partials/_nav-bar.ejs') %>
 
 
 
     <body>
-    <main>
-        <header>
-            <h1><%= destination.country %></h1>
-            <img src="<%= destination.image %>">
+    <main class="show-page-main">
+
+        <header class="header=show">
+            <div class="header-top">
+            <h1 class="country-name"><%= destination.country %></h1>
+            <a href="/destinations/<%= destination._id %>/notes/new" class="add-note-btn">add new note</a>
+            </div>
+            <div class="header-content">
+            <img src="<%= destination.image %>" alt="<%= destination.country %> image"/>
+            <p><%= destination.description %></p>
+            </div>
+
+            
+       
         </header>
             <section>
-                <ul>
-                    <a href="/destinations/<%= destination._id %>/notes/new">Add a new note</a>
-                    <% destination.notes.forEach(note=> { %>
-                    <li>
+                <ul class="list-thing">
+                
+                <% destination.notes.forEach(note=> { %>
+                 <li>
 
-                     <figure>
-                    <% if (note.image) { %>
-                    <img src="<%= note.image %>" alt="Photo of <%= note.city %>"
-                     style="max-width: 300px;">
-                    <% } %>
-                    <figcaption>
-                    <strong> <%= note.name %></strong> shared a note from <strong> <%= note.city %></strong>
-                     </figcaption>
-                     </figure>
+                <figure>
+                <% if (note.image) { %>
+                <figcaption class="caption">
+                <strong> <%= note.name %></strong> shared a note from <strong> <%= note.city %></strong>
+                </figcaption>
+                <img src="<%= note.image %>" alt="Photo of <%= note.city %>"
+                 style="max-width: 300px;">
+                <% } %>
                     
-                    <p><%= note.destinationNotes %></p>
+                </figure>
                     
-                     <% if(note.userHasFavorited) { %>
-                    <p> You've favorited this note!</p>
-                    <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Unfavorite it!</button>
-                    </form>
-                    <% } else { %>
-                     <p> You haven't favorited this note!</p>
-                     <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>" method="POST">
-                    <button type="submit">Favorite it!</button>
-                    </form>
-                    <% } %>
+                 <p><%= note.destinationNotes %></p>
+                    
+                <div class="note-buttons">
+                 <% if(note.userHasFavorited) { %>
+                <!-- <p> You've favorited this note!</p> -->
+                <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST" style="display:inline">
+                <button class="favorite-btn" type="submit">🤍</button>
+                </form>
+                <% } else { %>
+                <!-- <p> You haven't favorited this note!</p> -->
+                <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>" method="POST" style="display:inline">
+                <button class="unfavorite-btn" type="submit">❤️</button>
+                </form>
+                <% } %>
 
-                    <% if (note.authorId == user._id) { %>
-                      <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/edit">
-                    <button type="submit">Edit Note</button>
-                    </form>
+                <% if (note.authorId == user._id) { %>
+                 <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/edit">
+                <button class="edit" type="submit">edit</button>
+                </form>
 
-                    <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Delete Note</button>
-                    </form>
-                    </li>
-                    <% } %>
-                    <% }) %>
-                    </ul>
-                </section>
+                <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                <button class="delete" type="submit">delete</button>
+                </form>
+                </div>   
+                </li>
+                <% } %>
+                 <% }) %>
+                    
+                 </ul>
+            </section>
 
             </main>
         </body>

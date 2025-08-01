@@ -32,6 +32,10 @@ const destinationSchema = new mongoose.Schema({
     image: {
         type: String
     },
+    description: {
+        type: String,
+        default: "No description provided",
+    },
     country: {
         type: String,
         enum: ["Indonesia", "Thailand", "Portugal", "Singapore", "Norway"],
