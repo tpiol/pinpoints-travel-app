@@ -97,6 +97,9 @@ h6 {
     color: #F48B76;
 
 }
+.dropdown {
+    margin: 0;
+}
 
 .dropdown ul {
     position: absolute;
