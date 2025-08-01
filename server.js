@@ -13,6 +13,9 @@ const usersController = require("./controllers/users.js")
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
+
+const path = require('path');
+
 const MongoStore = require("connect-mongo");
 mongoose.connect(process.env.MONGODB_URI);
 const isSignedIn = require("./middleware/is-signed-in.js");
@@ -28,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   session({

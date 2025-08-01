@@ -1,12 +1,12 @@
 <%- include('../partials/_html-head.ejs', {title: 'My Profile' }) %>
-    <%- include('../partials/_nav-bar.ejs') %>
+<%- include('../partials/_nav-bar.ejs') %>
 
         <main>
             <h1>My Profile</h1>
 
             <h3> My Notes</h3>
             <p> You created <%= allMyNotes.length %>
-                    <%= allMyNotes.length===1 ? "note" : "notes" %>
+            <%= allMyNotes.length===1 ? "note" : "notes" %>
             </p>
 
             <h3> My Favorite Notes</h3>

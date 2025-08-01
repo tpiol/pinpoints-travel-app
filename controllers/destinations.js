@@ -6,7 +6,7 @@ const { default: mongoose } = require("mongoose");
 
 //                          ROUTES
 
-// GET /destinations
+// GET /destinations // INDEX
 router.get("/", async (req, res) => {
     try {
         const allDestinations = await Destination.find({})
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET /destinations/:destinationId
+// GET /destinations/:destinationId // SHOW     
 router.get("/:destinationId/notes", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId)
@@ -39,7 +39,7 @@ router.get("/:destinationId/notes", async (req, res) => {
 });
 
 
-// GET /destinations/new
+// GET /destinations/new // NEW
 router.get("/new", (req, res) => {
     try {
 
@@ -51,7 +51,7 @@ router.get("/new", (req, res) => {
     }
 });
 
-// GET /:destinationId/notes/new
+// GET /:destinationId/notes/new // NEW 
 router.get("/:destinationId/notes/new", async (req, res) => {
     const currentDestination = await Destination.findById(req.params.destinationId)
     res.render("destinations/notes/new.ejs", {
@@ -59,7 +59,7 @@ router.get("/:destinationId/notes/new", async (req, res) => {
     })
 });
 
-// GET /:destinationId/notes/edit
+// GET /:destinationId/notes/edit // EDIT
 router.get("/:destinationId/notes/:noteId/edit", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId)
@@ -75,7 +75,7 @@ router.get("/:destinationId/notes/:noteId/edit", async (req, res) => {
 });
 
 
-// POST /destinations/
+// POST /destinations/ // CREATE
 router.post("/", async (req, res) => {
     try {
         req.body.owner = req.session.user._id;
@@ -87,7 +87,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// POST //:destinationId/notes/
+// POST //:destinationId/notes/ // CREATE 
 router.post("/:destinationId/notes", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
@@ -100,7 +100,7 @@ router.post("/:destinationId/notes", async (req, res) => {
     }
 });
 
-// POST /destinations/:destinationId/notes/:notesId/favorited-by/:userId
+// POST /destinations/:destinationId/notes/:notesId/favorited-by/:userId // CREATE
 router.post("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
@@ -126,7 +126,7 @@ router.post("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, re
     }
 })
 
-// PUT //destinationId/notes
+// PUT //destinationId/notes // UPDATE
 router.put("/:destinationId/notes/:noteId", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
@@ -146,7 +146,7 @@ router.put("/:destinationId/notes/:noteId", async (req, res) => {
     }
 });
 
-// DELETE /destinations/:destinationId/notes/:notesId
+// DELETE /destinations/:destinationId/notes/:notesId // DELETE
 router.delete("/:destinationId/notes/:noteId", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
@@ -159,7 +159,7 @@ router.delete("/:destinationId/notes/:noteId", async (req, res) => {
     }
 });
 
-// DELTE /destinations/:destinationId/notes/:notesId/favorited-by/:userId
+// DELETE /destinations/:destinationId/notes/:notesId/favorited-by/:userId // DELETE
 router.delete("/:destinationId/notes/:noteId/favorited-by/:userId", async (req, res) => {
     try {
         const currentDestination = await Destination.findById(req.params.destinationId);
