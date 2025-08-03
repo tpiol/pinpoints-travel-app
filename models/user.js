@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   visitedDestinations: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Destination"
-  }
+  },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -7,29 +7,41 @@ const Destination = require("../models/destination");
 // GET 
 router.get("/profile", async (req, res) => {
     try {
-        const myNotes = await Destination.find({ "notes.authorId": req.session.user._id }).populate("notes.authorId")
-        const myFavoriteNotes = await Destination.find({ "notes.favoritedBy": req.session.user._id }).populate("notes.authorId")
+        const userId = req.session.user._id;
+
+        const myNotes = await Destination.find({ "notes.authorId": userId });
+        const myFavoriteNotes = await Destination.find({ "notes.favoritedBy": { $in: [userId] } });
+
         let noteCount = 0;
-        let allMyNotes = [];
+        let favoriteNoteCount = 0;
+
         myNotes.forEach(destination => {
             destination.notes.forEach(note => {
-                if (note.authorId.toString() === req.session.user._id.toString()) {
-                    noteCount++
-                    allMyNotes.push(note)
+                if (note.authorId.toString() === userId.toString()) {
+                    noteCount++;
+                }
+            });
+        });
+
+        myFavoriteNotes.forEach(destination => {
+            destination.notes.forEach(note => {
+                if (note.favoritedBy.map(id => id.toString()).includes(userId.toString())) {
+                    favoriteNoteCount++;
                 }
             });
         });
 
         res.render("users/show.ejs", {
-            myNotes,
-            myFavoriteNotes,
             noteCount,
-            allMyNotes,
+            favoriteNoteCount
         });
+
     } catch (error) {
         console.log(error);
         res.redirect("/");
-    };
+    }
 });
+
+
 
 module.exports = router;
