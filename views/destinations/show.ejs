@@ -40,14 +40,14 @@
                     
                 <div class="note-buttons">
                  <% if(note.userHasFavorited) { %>
-                <!-- <p> You've favorited this note!</p> -->
+                 <!-- <p> You liked this note!</p> -->
                 <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST" style="display:inline">
-                <button class="favorite-btn" type="submit">🤍</button>
+                <button class="favorite-btn" type="submit">❤️</button>
                 </form>
                 <% } else { %>
-                <!-- <p> You haven't favorited this note!</p> -->
+               <!-- <p> like this note!</p>  -->
                 <form action="/destinations/<%= destination._id %>/notes/<%= note._id %>/favorited-by/<%= user._id %>" method="POST" style="display:inline">
-                <button class="unfavorite-btn" type="submit">❤️</button>
+                <button class="unfavorite-btn" type="submit">🤍</button>
                 </form>
                 <% } %>
 

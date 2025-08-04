@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     try {
         const allDestinations = await Destination.find({})
         res.render("destinations/index.ejs", {
-            allDestinations: allDestinations,
+        allDestinations: allDestinations,
         });
     } catch (error) {
         console.log(error);

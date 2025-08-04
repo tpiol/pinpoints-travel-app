@@ -4,30 +4,34 @@
     </head>
 
     <body>
-      <h1>Add a new community note for <%= destination.country %></h1>
+      <div class="add-new">
+      <h1>Add a new community note for <%= destination.country %>
+      </h1>
+
+      <article>
+        <form action="/destinations/<%= destination._id %>/notes" method="POST">
+          <label for="name">Name:</label>
+          <input type="hidden" name="name" id="name" value="<%= user.username %>">
+          <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
+          <p><strong>
+              <%= user.username %>
+            </strong></p>
+
+          <label for="image">Upload Image URL</label>
+          <input type="text" name="image" id="image">
+
+          <label for="city">City</label>
+          <input type="text" name="city" id="city">
+
+          <label for="destinationNotes">Add Your Note:</label>
+          <textarea name="destinationNotes" id="destinationNotes" rows="4" required></textarea>
+
+          <button type="submit">Submit</button>
+
+        </form>
+      </article>
+      </a>
+      </div>
     </body>
-    <article>
-      <form action="/destinations/<%= destination._id %>/notes" method="POST">
-        <label for="name">Name:</label>
-        <input type="hidden" name="name" id="name" value="<%= user.username %>">
-        <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
-        <p><strong>
-            <%= user.username %>
-          </strong></p>
-
-        <label for="image">Upload Image URL</label>
-        <input type="text" name="image" id="image">
-
-        <label for="city">City</label>
-        <input type="text" name="city" id="city">
-
-        <label for="destinationNotes">Add Your Note:</label>
-        <textarea name="destinationNotes" id="destinationNotes" rows="4" required></textarea>
-
-        <button type="submit">Submit</button>
-
-      </form>
-    </article>
-    </a>
 
     </html>

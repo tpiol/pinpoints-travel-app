@@ -8,12 +8,11 @@ const Destination = require("../models/destination");
 router.get("/profile", async (req, res) => {
     try {
         const userId = req.session.user._id;
-
         const myNotes = await Destination.find({ "notes.authorId": userId });
-        const myFavoriteNotes = await Destination.find({ "notes.favoritedBy": { $in: [userId] } });
+       
 
         let noteCount = 0;
-        let favoriteNoteCount = 0;
+       
 
         myNotes.forEach(destination => {
             destination.notes.forEach(note => {
@@ -23,17 +22,9 @@ router.get("/profile", async (req, res) => {
             });
         });
 
-        myFavoriteNotes.forEach(destination => {
-            destination.notes.forEach(note => {
-                if (note.favoritedBy.map(id => id.toString()).includes(userId.toString())) {
-                    favoriteNoteCount++;
-                }
-            });
-        });
 
         res.render("users/show.ejs", {
-            noteCount,
-            favoriteNoteCount
+            noteCount
         });
 
     } catch (error) {

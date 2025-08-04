@@ -4,33 +4,40 @@
     </head>
 
     <body>
+
       <h1>Edit your note in: <%= destination.country %></h1>
-   
-    <article>
-      <form action="/destinations/<%= destination._id %>/notes/<%= note.id %>?_method=PUT" method="POST">
-        <label for="name">Name:</label>
-        <input type="hidden" name="name" id="name" value="<%= user.username %>">
-        <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
 
-        <p><strong><%= user.username %></strong></p>
-        <% if (note.image) { %>
-         <p>Current Image:</p>
-         <img src="<%= note.image %>" alt="Current Note Image" style="max-width: 300px; border-radius:8px">
-          <% } %>
+      <article class="background">
+        <div class="edit-form"></div>
+        <form action="/destinations/<%= destination._id %>/notes/<%= note.id %>?_method=PUT" method="POST">
+          <label for="name">Name:</label>
+          <input type="hidden" name="name" id="name" value="<%= user.username %>">
+          <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
 
-        <label for="image">Edit Image URL</label>
-        <input type="text" name="image" id="image" value="<%= note.image %>">
+          <p class="edit-username"><strong>
+              <%= user.username %>
+            </strong></p>
+          <% if (note.image) { %>
+            <p class="edit-img">Current Image:</p>
+            <img class="image" src="<%= note.image %>" alt="Current Note Image" style="max-width: 300px; border-radius:8px">
+            <% } %>
 
-        <label for="city">Edit City</label>
-        <input type="text" name="city" id="city" value="<%= note.city %>">
+              <label for="image">Edit Image URL</label>
+              <input type="text" name="image" id="image" value="<%= note.image %>">
 
-        <label for="destinationNotes">Edit Your Note:</label>
-        <textarea name="destinationNotes" id="destinationNotes" rows="4" required ><%= note.destinationNotes %></textarea>
+              <label for="city">Edit City</label>
+              <input type="text" name="city" id="city" value="<%= note.city %>">
 
-        <button type="submit">Submit</button>
+              <label for="destinationNotes">Edit Your Note:</label>
+              <textarea name="destinationNotes" id="destinationNotes" rows="4"
+                required><%= note.destinationNotes %></textarea>
 
-      </form>
-    </article>
+              <button type="submit">Submit</button>
 
- </body>
+        </form>
+        </div>
+      </article>
+
+    </body>
+
     </html>

@@ -1,18 +1,28 @@
-<%- include('./partials/_html-head.ejs', {title: 'Home'}) %>
-<%- include('./partials/_nav-bar.ejs') %>
+<%- include('./partials/_html-head.ejs', {title: 'Home' }) %>
+  <%- include('./partials/_nav-bar.ejs') %>
 
 
-  <main>
-    <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-      <a href="/auth/sign-out">Sign-Out</a>
-    </p>
-    <% } else { %>
-    <h1>Welcome to pinpoints!</h1>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">sign in</a>
-    <% } %>
-  </main>
-</body>
-</html>
+    <main>
+      <% if (user) { %>
+        <h1>Welcome to Pinpoints, <%= user.username %>!</h1>
+        <p>
+          PinPoints is a place where travelers like you share photos, tips, and honest advice
+          about their favorite destinations. Whether it’s a hidden
+          gem or a must-see hotspot, our community helps you pinpoint
+          exactly where you want to go next. Explore real experiences, get
+          inspired, and add your own notes to help others make their travel dreams come true!
+        </p>
+       
+        <p>
+          <a href="/auth/sign-out">Sign-Out</a>
+        </p>
+
+        <% } else { %>
+          <h1>Welcome to pinpoints!</h1>
+          <a href="/auth/sign-up">Sign up</a>
+          <a href="/auth/sign-in">sign in</a>
+          <% } %>
+    </main>
+    </body>
+
+    </html>
