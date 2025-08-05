@@ -10,20 +10,20 @@
 
       <article>
         <form action="/destinations/<%= destination._id %>/notes" method="POST">
-          <label for="name">Name:</label>
+          <label class="label" for="name">Name:</label>
           <input type="hidden" name="name" id="name" value="<%= user.username %>">
           <input type="hidden" name="authorId" id="authorId" value="<%= user._id %>">
-          <p><strong>
+          <p class="username-new"><strong>
               <%= user.username %>
             </strong></p>
 
-          <label for="image">Upload Image URL</label>
+          <label class="label" for="image">Upload Image URL</label>
           <input type="text" name="image" id="image-new">
 
-          <label for="city">City</label>
+          <label class="label" for="city">City</label>
           <input type="text" name="city" id="city-new">
 
-          <label for="destinationNotes">Add Your Note:</label>
+          <label class="label" for="destinationNotes">Add Your Note:</label>
           <textarea name="destinationNotes" id="destinationNotes-new" rows="4" required></textarea>
 
           <button type="submit">Submit</button>
