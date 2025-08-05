@@ -20,7 +20,7 @@ Users using the application have the ability to sign up for a new account, add a
 ### *Attributions*
 * [ChatGPT](https://www.chatgpt.com) - for coding guidance, troubleshooting, and helped design my logo.
 * [MDN](https://developer.mozilla.org/en-US/) - for reference on JavaScript, HTML, and CSS
-* [PicoLibrary] (https://www.picocss.com) - to help with basic styling
+* [PicoLibrary](www.picocss.com) - to help with basic styling
 * [Canva](https://www.canva.com) - for help creating the logo
 * [Google Font](https://fonts.googleapis.com/css2?family=Barriecito&display=swap) - for the font
 
