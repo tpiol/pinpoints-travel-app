@@ -412,8 +412,11 @@ header img {
 p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 16px;
-    padding: 0 1rem;
-    color:  #3B2A22; !important 
+    padding: 0 1rem; 
+}
+
+.paragraph {
+     color:  #3B2A22; !important
 }
 
 form {
