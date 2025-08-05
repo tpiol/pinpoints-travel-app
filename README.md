@@ -23,6 +23,7 @@ Users using the application have the ability to sign up for a new account, add a
 * [PicoLibrary](www.picocss.com) - to help with basic styling
 * [Canva](https://www.canva.com) - for help creating the logo
 * [Google Font](https://fonts.googleapis.com/css2?family=Barriecito&display=swap) - for the font
+* [Pexels](https://pexels.com) - to upload own photos and use other photos also
 
 ### *Technologies Used*
 * JavaScript
